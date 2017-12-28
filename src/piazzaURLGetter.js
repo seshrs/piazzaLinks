@@ -161,6 +161,20 @@ let _eecs280_getter = callback => {
 };
 _umich.addCourse('EECS 280', _eecs280_getter);
 
+let _eecs485_getter = callback => {
+  _ajaxRequest(
+    "https://eecs485staff.github.io/eecs485.org/",
+    text => {
+      let matchResults = text.match(/https:\/\/piazza\.com\/class\/[0-9A-Za-z]*/);
+      if (matchResults.length < 1) {
+        return '';
+      }
+      callback(matchResults[0]);
+    }
+  );
+};
+_umich.addCourse('EECS 485', _eecs485_getter);
+
 
 /* TEST */
 // let _test = new University('Test');
