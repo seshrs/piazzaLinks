@@ -27,6 +27,22 @@ import {piazzaURLGetter} from './piazzaURLGetter.js';
 import * as utility from './utility.js';
 
 //
+// PART 0: OPTIONS
+//         Open up the options tab the first time this extension is started.
+//
+chrome.runtime.onInstalled.addListener(
+  object => {
+    chrome.tabs.create(
+      {url: chrome.extension.getURL("options.html")},
+      tab => {
+        console.log("Options launched in new tab");
+      },
+    );
+  },
+);
+
+
+//
 // PART 1: UPDATE
 //         Check every week for updated class Piazza URL
 //         This applies only if the user selected a class in the options.
