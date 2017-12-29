@@ -228,10 +228,14 @@ function enablePiazzaURLInput() {
 
 
 function hideOtherInfoBox() {
-  utility.hide(document.getElementById('piazza_other_tr'));
+  for (let i = 0; i < 2; ++i) {
+    utility.hide(document.getElementById('piazza_other_tr_' + i));
+  }
 }
 function showOtherInfoBox() {
-  utility.show(document.getElementById('piazza_other_tr'));
+  for (let i = 0; i < 2; ++i) {
+    utility.show(document.getElementById('piazza_other_tr_' + i));
+  }
 }
 
 

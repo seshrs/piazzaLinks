@@ -86,6 +86,23 @@
 // Standalone module exporting utility functions.
 //
 
+/* COPYRIGHT AND LICENSE NOTICE
+ * 
+ * Copyright (C) 2018  Sesh Sadasivam
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 /**
  * Hides a DOM element by setting its display style to `none`.
  * @param {HTMLElement} el sdfsdf
@@ -291,7 +308,27 @@ function getSavedPiazzaNetworkID(callback) {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return piazzaURLGetter; });
 //
 // piazzaURLGetter.js
+// Creates and exports the object `piazzaURLGetter` with information
+// on university courses that support dynamic fetching of their current
+// Piazza URL.
 //
+
+/* COPYRIGHT AND LICENSE NOTICE
+ * 
+ * Copyright (C) 2018  Sesh Sadasivam
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 class Course {
   /**
@@ -422,8 +459,8 @@ piazzaURLGetter.addUniversity(_umich);
 
 let _eecs280_getter = callback => {
   _ajaxRequest(
-    //"http://eecs280.org/data/links.json",
-    "http://0.0.0.0:8000/data/links.json",
+    "http://eecs280.org/data/links.json",
+    // "http://0.0.0.0:8000/data/links.json",
     jsonText => {
       let dynamicContent = JSON.parse(jsonText);
       callback(dynamicContent.links.piazza);
@@ -431,6 +468,20 @@ let _eecs280_getter = callback => {
   );
 };
 _umich.addCourse('EECS 280', _eecs280_getter);
+
+let _eecs485_getter = callback => {
+  _ajaxRequest(
+    "https://eecs485staff.github.io/eecs485.org/",
+    text => {
+      let matchResults = text.match(/https:\/\/piazza\.com\/class\/[0-9A-Za-z]*/);
+      if (matchResults.length < 1) {
+        return '';
+      }
+      callback(matchResults[0]);
+    }
+  );
+};
+_umich.addCourse('EECS 485', _eecs485_getter);
 
 
 /* TEST */
@@ -485,7 +536,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utility_js__ = __webpack_require__(0);
 //
 // options.js
+// This script file powers the interactivity of the extension's Options page.
+// It's included in options.html.
 //
+
+/* COPYRIGHT AND LICENSE NOTICE
+ * 
+ * Copyright (C) 2018  Sesh Sadasivam
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 
 
@@ -694,10 +764,14 @@ function enablePiazzaURLInput() {
 
 
 function hideOtherInfoBox() {
-  __WEBPACK_IMPORTED_MODULE_1__utility_js__["g" /* hide */](document.getElementById('piazza_other_tr'));
+  for (let i = 0; i < 2; ++i) {
+    __WEBPACK_IMPORTED_MODULE_1__utility_js__["g" /* hide */](document.getElementById('piazza_other_tr_' + i));
+  }
 }
 function showOtherInfoBox() {
-  __WEBPACK_IMPORTED_MODULE_1__utility_js__["k" /* show */](document.getElementById('piazza_other_tr'));
+  for (let i = 0; i < 2; ++i) {
+    __WEBPACK_IMPORTED_MODULE_1__utility_js__["k" /* show */](document.getElementById('piazza_other_tr_' + i));
+  }
 }
 
 

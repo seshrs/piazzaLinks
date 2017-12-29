@@ -86,6 +86,23 @@
 // Standalone module exporting utility functions.
 //
 
+/* COPYRIGHT AND LICENSE NOTICE
+ * 
+ * Copyright (C) 2018  Sesh Sadasivam
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 /**
  * Hides a DOM element by setting its display style to `none`.
  * @param {HTMLElement} el sdfsdf
@@ -291,7 +308,27 @@ function getSavedPiazzaNetworkID(callback) {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return piazzaURLGetter; });
 //
 // piazzaURLGetter.js
+// Creates and exports the object `piazzaURLGetter` with information
+// on university courses that support dynamic fetching of their current
+// Piazza URL.
 //
+
+/* COPYRIGHT AND LICENSE NOTICE
+ * 
+ * Copyright (C) 2018  Sesh Sadasivam
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 class Course {
   /**
@@ -422,8 +459,8 @@ piazzaURLGetter.addUniversity(_umich);
 
 let _eecs280_getter = callback => {
   _ajaxRequest(
-    //"http://eecs280.org/data/links.json",
-    "http://0.0.0.0:8000/data/links.json",
+    "http://eecs280.org/data/links.json",
+    // "http://0.0.0.0:8000/data/links.json",
     jsonText => {
       let dynamicContent = JSON.parse(jsonText);
       callback(dynamicContent.links.piazza);
@@ -431,6 +468,20 @@ let _eecs280_getter = callback => {
   );
 };
 _umich.addCourse('EECS 280', _eecs280_getter);
+
+let _eecs485_getter = callback => {
+  _ajaxRequest(
+    "https://eecs485staff.github.io/eecs485.org/",
+    text => {
+      let matchResults = text.match(/https:\/\/piazza\.com\/class\/[0-9A-Za-z]*/);
+      if (matchResults.length < 1) {
+        return '';
+      }
+      callback(matchResults[0]);
+    }
+  );
+};
+_umich.addCourse('EECS 485', _eecs485_getter);
 
 
 /* TEST */
@@ -484,9 +535,46 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utility_js__ = __webpack_require__(0);
 //
 // background.js
+// This is the background script that runs eternally. It:
+//   - Checks for updates to the Piazza Network ID periodically, if applicable
+//   - Enables and controls the page action button for relevant pages
+//   - Listens to search queries in the omnibox and redirects queries for
+//     Piazza Posts
+
+/* COPYRIGHT AND LICENSE NOTICE
+ * 
+ * Copyright (C) 2018  Sesh Sadasivam
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+
+
+
 //
-
-
+// PART 0: OPTIONS
+//         Open up the options tab the first time this extension is started.
+//
+chrome.runtime.onInstalled.addListener(
+  object => {
+    chrome.tabs.create(
+      {url: chrome.extension.getURL("options.html")},
+      tab => {
+        console.log("Options launched in new tab");
+      },
+    );
+  },
+);
 
 
 //

@@ -86,6 +86,23 @@
 // Standalone module exporting utility functions.
 //
 
+/* COPYRIGHT AND LICENSE NOTICE
+ * 
+ * Copyright (C) 2018  Sesh Sadasivam
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 /**
  * Hides a DOM element by setting its display style to `none`.
  * @param {HTMLElement} el sdfsdf
@@ -295,7 +312,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utility_js__ = __webpack_require__(0);
 //
 // replaceWithPiazzaLinks.js
+// This script is injected into all web pages. It periodically searches
+// for text in the form of a Piazza post reference, and converts them
+// into hyperlinks to the respective posts.
 //
+
+/* COPYRIGHT AND LICENSE NOTICE
+ * 
+ * Copyright (C) 2018  Sesh Sadasivam
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 
 

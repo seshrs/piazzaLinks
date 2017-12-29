@@ -151,8 +151,8 @@ piazzaURLGetter.addUniversity(_umich);
 
 let _eecs280_getter = callback => {
   _ajaxRequest(
-    //"http://eecs280.org/data/links.json",
-    "http://0.0.0.0:8000/data/links.json",
+    "http://eecs280.org/data/links.json",
+    // "http://0.0.0.0:8000/data/links.json",
     jsonText => {
       let dynamicContent = JSON.parse(jsonText);
       callback(dynamicContent.links.piazza);
