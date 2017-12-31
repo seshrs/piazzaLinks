@@ -292,9 +292,10 @@ function getSavedPiazzaNetworkID(callback) {
     {
       network_id: '',
       links_enabled: true,
+      omnibox_enabled: true,
     }, (items) => {
-      if (!items.links_enabled || !items.network_id) return;
-      callback(chrome.runtime.lastError ? null : items['network_id']);
+      //if (!items.links_enabled || !items.network_id) return;
+      callback(chrome.runtime.lastError ? null : items);
     }
   );
 }
@@ -399,7 +400,11 @@ function findAllPiazzaRefs(network_id, el) {
 }
 
 function checkForLinks(el) {
-  return network_id => findAllPiazzaRefs(network_id, el);
+  return ({network_id, links_enabled}) => {
+    if (links_enabled && network_id) {
+      findAllPiazzaRefs(network_id, el);
+    }
+  };
 }
 
 

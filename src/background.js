@@ -144,8 +144,9 @@ chrome.webNavigation.onBeforeNavigate.addListener(
     var query = utility.getParameterByName('q', details.url).substr(1);
     // console.log("query:", query);
     utility.getSavedPiazzaNetworkID(
-      network_id => {
-        if (network_id) {
+      ({network_id, omnibox_enabled}) => {
+        console.log({network_id, omnibox_enabled});
+        if (omnibox_enabled && network_id) {
           let piazzaURL = `https://piazza.com/class/${network_id}?cid=${query}`;
           chrome.tabs.update({"url": piazzaURL});
         }

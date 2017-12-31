@@ -209,9 +209,10 @@ export function getSavedPiazzaNetworkID(callback) {
     {
       network_id: '',
       links_enabled: true,
+      omnibox_enabled: true,
     }, (items) => {
-      if (!items.links_enabled || !items.network_id) return;
-      callback(chrome.runtime.lastError ? null : items['network_id']);
+      //if (!items.links_enabled || !items.network_id) return;
+      callback(chrome.runtime.lastError ? null : items);
     }
   );
 }

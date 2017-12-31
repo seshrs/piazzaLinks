@@ -262,7 +262,7 @@ function restore_options() {
   chrome.storage.sync.get({
     network_id: '',
     links_enabled: true,
-    omnibox_enabled,
+    omnibox_enabled: true,
     course_name: '',
     university_name: '',
   }, function(items) {
@@ -326,7 +326,3 @@ document.addEventListener('save_options_success', updatePiazzaExampleLink);
 
 // Restore Options
 document.addEventListener('DOMContentLoaded', restore_options);
-
-
-// TODO: Privacy policy
-document.getElementById('privacy_policy_link').href = "#";

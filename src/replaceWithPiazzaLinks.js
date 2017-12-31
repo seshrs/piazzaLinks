@@ -87,7 +87,11 @@ function findAllPiazzaRefs(network_id, el) {
 }
 
 function checkForLinks(el) {
-  return network_id => findAllPiazzaRefs(network_id, el);
+  return ({network_id, links_enabled}) => {
+    if (links_enabled && network_id) {
+      findAllPiazzaRefs(network_id, el);
+    }
+  };
 }
 
 
